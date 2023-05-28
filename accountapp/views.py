@@ -86,3 +86,6 @@ def schedule(request):
 
     context = {"categories": Category.objects.all(), "hospitals": Hospital.objects.all()}
     return render(request, "schedule.html", context)
+
+def leaderboard(request):
+    return render(request, "leaderboard.html")

@@ -12,6 +12,7 @@ urlpatterns = [
     path('user_logout', views.user_logout, name='user_logout'),
     path('', views.home, name='home'),
     path('schedule', views.schedule, name='schedule'),
+    path('leaderboard', views.leaderboard, name='leaderboard'),
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
