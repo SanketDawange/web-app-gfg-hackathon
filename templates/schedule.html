@@ -1,0 +1,53 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div id="message-box" class="col-md-8">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %} alert-{{ message.tags }} {% endif %} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    <form class="form" action="/schedule" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="hospitalSelect">Select Category:</label>
+            <select required class="form-control" name="category">
+                <option selected value="">Choose category</option>
+                {% for category in categories %}
+                <option value="{{category.pk}}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mt-3"></div>
+
+
+        <div class="form-group">
+            <label for="doctorSelect">Select Hospital:</label>
+            <select required class="form-control" name="hospital">
+                <option selected value="">Choose Hospital</option>
+                {% for hospital in hospitals %}
+                <option value="{{hospital.pk}}">{{hospital.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mt-3"></div>
+
+
+        <div class="form-group">
+            <label for="reasonInput">Reason:</label>
+            <input required type="text" class="form-control" name="reason" placeholder="Enter reason for appointment">
+        </div>
+
+        <div class="mt-3"></div>
+
+        <button type="submit" style="width: 100%;" class="btn btn-primary">Book Appointment</button>
+    </form>
+</div>
+{% endblock %}
